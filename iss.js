@@ -33,10 +33,17 @@ const fetchCoordsByIP = function(ip,callback) {
       callback(error,null);
       return;
     }
+
+    if (body.success === false) {
+      const msg = `Invalid ip : ${ip}`;
+      callback(Error(msg),null);
+    }
+
     const cordinates = {
       latitude : body.latitude,
       longitude : body.longitude
     };
+    
     callback(null,cordinates);
 
   });
