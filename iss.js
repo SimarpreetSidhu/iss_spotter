@@ -24,4 +24,22 @@ const fetchMyIP = function(callback) {
   });
 
 };
-module.exports = { fetchMyIP };
+
+const fetchCoordsByIP = function(ip,callback) {
+  // use requeste to fetch cordinates for given ip
+  needle.get(`http://ipwho.is/${ip}`,(error, response,body) => {
+   
+    if (error) {
+      callback(error,null);
+      return;
+    }
+    const cordinates = {
+      latitude : body.latitude,
+      longitude : body.longitude
+    };
+    callback(null,cordinates);
+
+  });
+
+};
+module.exports = { fetchMyIP, fetchCoordsByIP };
